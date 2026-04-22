@@ -1,5 +1,5 @@
 async function getHTML(code) {
-    const codeList = await fetch('/code.json');
+    const codeList = await fetch('./code.json');
     const data = await codeList.json();
 
     return (data.codes[code]) ? data.codes[code] : null;
@@ -10,7 +10,7 @@ async function extraSiteLoader(code) {
     if (info != null) {
         // info.file ist der Pfad zur Datei in deiner JSON (z.B. "content/demokratie.html")
         try {
-            const response = await fetch(`/content/${info}.html`);
+            const response = await fetch(`./content/${info}.html`);
             if (!response.ok) throw new Error("Datei nicht gefunden");
 
             const htmlContent = await response.text(); // Hier wird die Datei als Text gelesen
