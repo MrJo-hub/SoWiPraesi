@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: auto;
+    background: linear-gradient(#03081A, #020719);
+    color: #c0c2cc;
+    overflow-x: hidden;
+}
+
+header {
+    /* Header fixieren, damit er beim Scrollen oben bleibt */
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7.5vh;
+    /* Feste Höhe für die Navigation */
+
+    /* Glassmorphism-Effekt */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Zentrierung des Inhalts */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.headerBtn {
+    /* Flexibel in der Breite, feste proportionale Höhe */
+    width: auto;
+    height: 40px;
+    padding: 0 20px;
+
+    /* Glassmorphism: Transparentes Weiß statt solidem Grau */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Für Safari Support */
+
+    /* Dezenter Rahmen, der oben etwas heller ist (Lichteinfall) */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    /* Voll abgerundet wirkt moderner */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Text-Styling */
+    color: #c0c2cc;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.headerIcon {
+    /* Das Icon im Button braucht kein eigenes Background/Blur mehr */
+    height: 18px;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    fill: currentColor;
+    /* Nutzt die Textfarbe des Buttons */
+    margin-right: 10px;
+    /* Abstand zum Text im Button */
+    transition: transform 0.3s ease;
+}
+
+/* Hover-Effekt: Leuchten und leichte Aufhellung */
+.headerBtn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(74, 0, 224, 0.3);
+    /* Ein Hauch deines Blau-Violetts */
+    transform: translateY(-2px);
+    /* Minimales Anheben */
+}
+
+/* Klick-Effekt */
+.headerBtn:active {
+    transform: translateY(0) scale(0.95);
+}
+main {
+    width: 100%; /* Verhindert horizontales Scrollen durch 100vw */
+    min-height: 100vh; /* Erlaubt dem Container zu wachsen, falls der Inhalt länger ist */
+    
+    /* Scroll-Verhalten */
+    overflow-y: scroll; 
+    overflow-x: hidden;
+
+    /* Abstände & Zentrierung */
+    padding: 10vh 10vw; /* Nutzt Viewport-Einheiten für bessere Responsivität */
+    box-sizing: border-box;
+    
+    /* Flexbox-Korrektur */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    justify-content: flex-start; /* Startet den Inhalt oben */
+    
+    /* Optional: Glatter Übergang beim Inhaltswechsel */
+    scroll-behavior: smooth;
+}
+
+/* WICHTIG: Damit der Text innerhalb von main nicht zu breit wird */
+main > div {
+    width: 100%;
+    max-width: 900px; /* Begrenzt die Breite für bessere Lesbarkeit */
+}
+
+.inputBoxCon {
+    width: auto;
+    height: 33vh;
+    border-radius: 25px;
+    padding: 5%;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c0c2cc;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    align-self: center;
+
+    flex-direction: column;
+}
+
+.textBox {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+
+    font-weight: bold;
+    margin: 5% 0;
+}
+
+.textHead {
+    font-size: 2.5rem;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.iBLabel {
+    color: #c0c2cc;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.iBInput {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.iBInput.wrong {
+    border: 2.5px solid rgba(110, 1, 1);
+    /* Dein Akzentrgb(87, 6, 6)t */
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 15px rgba(110, 1, 1);
+}
+
+/* Wenn man in das Feld klickt */
+.iBInput:focus {
+    border-color: #4a00e0;
+    /* Dein Akzent-Violett */
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 15px rgba(74, 0, 224, 0.2);
+}
+
+.iBButton {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: bold;
+}
+
+.iBButton p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* Hover-Effekt für den Button */
+.iBButton:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(74, 0, 224, 0.5);
+    filter: brightness(1.1);
+}
+
+.iBButton:active {
+    transform: scale(0.98);
+}
+
+.content-img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-self: center;
+    justify-self: center;
+}
+
+.sowi-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.content-block {
+    margin-bottom: 40px;
+}
+
+/* Stat-Karten Design */
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.stat-card strong {
+    display: block;
+    color: #4a00e0; /* Akzentfarbe */
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Tabellen Design für Lieferanten */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #c0c2cc;
+}
+
+.data-table tr td:first-child {
+    font-weight: bold;
+    color: #ffffff;
+    width: 30%;
+}
+
+/* Fokus-Bereich für das Problem */
+.problem-focus {
+    background: linear-gradient(135deg, rgba(255, 75, 43, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+    border-left: 2px solid #ff4b2b;
+    padding: 20px 30px;
+    border-radius: 0 15px 15px 0;
+}
+
+.problem-item {
+    margin-bottom: 15px;
+}
+
+.problem-item strong {
+    color: #ff4b2b;
+    display: block;
+    margin-bottom: 5px;
+}
+

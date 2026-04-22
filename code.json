@@ -1,0 +1,15 @@
+{
+    "codes": {
+        "1258": "energietraeger",
+        "6789": "importPreise",
+        "2712": "energieEu",
+        "5429": "transport",
+        "2031": "rolleUnternehmen",
+        "7302": "rolleRegierung",
+        "3209": "rollePrivatperson",
+        "4536": "rolleKonfliktPartei",
+        "8347": "rolleExportLand",
+        "9832": "rolleEuMitglied",
+        "1990": "admin"
+    }
+}

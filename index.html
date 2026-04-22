@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoWi Präsentation | Interaktiv</title>
+
+    <link rel="stylesheet" href="style/basis.css">
+</head>
+
+<body>
+    <header>
+        <div class="headerBtn" onclick="location.reload()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="headerIcon">
+                <path d="M6.5 9a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z" />
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM9 5a4 4 0 1 0 2.248 7.309l1.472 1.471a.75.75 0 1 0 1.06-1.06l-1.471-1.472A4 4 0 0 0 9 5Z"
+                    clip-rule="evenodd" />
+            </svg>
+            <p>Zurück zu der <br> Code Eingabe</p>
+        </div>
+    </header>
+    <main id="main">
+        <div class="inputBoxCon">
+            <div class="textBox">
+                <p class="textHead">Willkommen</p>
+                <p class="textText">Gib einen Code ein um fortzufahren</p>
+            </div>
+            <div class="inputBox">
+                <label for="codeInput" class="iBLabel">Code</label>
+                <input id="codeInput" class="iBInput" type="text" placeholder="Gib einen Code ein...">
+                <div class="iBButton" id="codeSendBtn">
+                    <p>Code bestätigen ></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        const inputField = document.getElementById("codeInput");
+        const codeBtn = document.getElementById("codeSendBtn");
+        const main = document.getElementById("main");
+
+        codeBtn.addEventListener("click", async () => { // async hinzugefügt für einfacheres Handling
+            const code = inputField.value;
+
+            // 1. Hole die Info aus der JSON
+            const info = await getHTML(code);
+
+            if (info != null) {
+                // info.file ist der Pfad zur Datei in deiner JSON (z.B. "content/demokratie.html")
+                try {
+                    const response = await fetch(`/content/${info}.html`);
+                    if (!response.ok) throw new Error("Datei nicht gefunden");
+
+                    const htmlContent = await response.text(); // Hier wird die Datei als Text gelesen
+
+                    // 2. In das main-Element einfügen
+                    main.innerHTML = htmlContent;
+
+                    // Fehler-Klasse entfernen, falls sie vorher da war
+                    codeBtn.classList.remove("wrong");
+                } catch (err) {
+                    console.error("Fehler beim Laden der Inhaltsdatei:", err);
+                    main.innerHTML = "<p>Inhalt konnte nicht geladen werden.</p>";
+                }
+            } else {
+                // Code existiert nicht in der JSON
+                inputField.classList.add("wrong");
+
+                // Kleiner Bonus: Schüttel-Effekt nach 500ms entfernen, damit man ihn erneut triggern kann
+                setTimeout(() => inputField.classList.remove("wrong"), 1000);
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
